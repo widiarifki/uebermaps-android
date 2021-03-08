@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="id.widiarifki.uebermaps.presentation.main.account.AccountViewModel" />
+    </data>
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="@dimen/_20sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.userLogin.data.name, default=Name}"
+                android:visibility="@{viewModel.userLogin != null ? View.VISIBLE : View.GONE, default=visible}"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:visibility="@{viewModel.userLogin != null ? View.VISIBLE : View.GONE, default=visible}"
+                android:onClick="@{viewModel.actionLogout}"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

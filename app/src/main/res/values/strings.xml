@@ -1,0 +1,19 @@
+<resources>
+    <string name="msg_error_no_connection">Tidak ada koneksi internet</string>
+    <string name="msg_error_global">Terjadi kesalahan saat memuat data</string>
+    <string name="msg_empty_global">Tidak ditemukan ada data</string>
+    <string name="msg_loading_global">Loading..</string>
+    <string name="btn_retry">Coba lagi</string>
+
+    <!-- Custom string -->
+    <string name="app_name">Uebermaps</string>
+    <string name="label_account">Account</string>
+    <string name="label_notif">Notification</string>
+    <string name="label_explore">Explore</string>
+    <string name="label_see_all">See All</string>
+    <string name="hint_username">Username / Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="prompt_please_login">Login to create &amp; share your own maps with your favorite spots!</string>
+    <string name="btn_logout">Logout</string>
+</resources>

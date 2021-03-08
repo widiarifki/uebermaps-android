@@ -1,0 +1,62 @@
+package id.widiarifki.uebermaps.repository
+
+import android.content.SharedPreferences
+import id.widiarifki.uebermaps.data.local.DbConstant
+import id.widiarifki.uebermaps.data.local.dao.UserDao
+import id.widiarifki.uebermaps.data.model.User
+import id.widiarifki.uebermaps.data.network.APIService
+import id.widiarifki.uebermaps.data.network.response.wrapper.Meta
+import id.widiarifki.uebermaps.helper.PreferenceConstant
+import id.widiarifki.uebermaps.helper.PreferenceHelper
+import id.widiarifki.uebermaps.helper.StatedLiveData
+import kotlinx.coroutines.delay
+import javax.inject.Inject
+
+class UserRepository
+@Inject constructor(
+    private val apiService: APIService,
+    private val userDao: UserDao
+) {
+
+    val userLogin = userDao.getUserLogin()
+
+    suspend fun loginUser(username: String?, password: String?): StatedLiveData<User>
+    {
+        val liveData = StatedLiveData<User>()
+        try {
+            val loginRequest = apiService.loginUser(username, password)
+            if (loginRequest.data != null) {
+                saveLoginUser(loginRequest.data)
+                liveData.load(loginRequest.data)
+            } else {
+                liveData.error(loginRequest.meta?.errorMessage)
+            }
+        } catch (e: Exception) {
+            liveData.error(e)
+        }
+        return liveData
+    }
+
+    private suspend fun saveLoginUser(user: User?) {
+        try {
+            userDao.insert(user.also { it?.isUserLogin = true })
+        } catch (e: Exception) {
+            throw (e)
+        }
+    }
+
+    suspend fun logoutUser(): StatedLiveData<User>
+    {
+        val liveData = StatedLiveData<User>()
+
+        delay(1000) // pretend logout process need to call API also
+        try {
+            userDao.deleteUserLogin()
+            liveData.success()
+        } catch (e: Exception) {
+            liveData.error(e)
+        }
+
+        return liveData
+    }
+}

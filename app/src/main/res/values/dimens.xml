@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottomnav_height">@dimen/_42sdp</dimen>
+    <dimen name="edittext_search_height">@dimen/_36sdp</dimen>
+</resources>

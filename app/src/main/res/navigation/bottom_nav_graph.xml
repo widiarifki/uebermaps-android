@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_menu_navigation"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="id.widiarifki.uebermaps.presentation.main.home.HomeFragment"
+        android:label="@string/label_explore"
+        tools:layout="@layout/fragment_home"/>
+    <fragment
+        android:id="@+id/notifFragment"
+        android:name="id.widiarifki.uebermaps.presentation.main.notif.NotifFragment"
+        android:label="@string/label_notif"
+        tools:layout="@layout/fragment_notif"/>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="id.widiarifki.uebermaps.presentation.main.account.AccountFragment"
+        android:label="@string/label_account"
+        tools:layout="@layout/fragment_account"/>
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="id.widiarifki.uebermaps.presentation.main.auth.AuthFragment"
+        android:label="AuthFragment"
+        tools:layout="@layout/fragment_auth"/>
+</navigation>

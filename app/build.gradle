@@ -66,11 +66,13 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpLogging_version"
     implementation "com.intuit.sdp:sdp-android:$rootProject.intuit_sdp_version"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     kapt "androidx.room:room-compiler:$room_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
 
     // Testing library
     testImplementation "junit:junit:$rootProject.junit_version"

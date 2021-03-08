@@ -11,7 +11,7 @@ import id.widiarifki.uebermaps.data.model.User
 interface UserDao {
 
     @Insert
-    suspend fun insert(user: User?)
+    suspend fun insert(user: User)
 
     @Query("SELECT * FROM ${DbConstant.TBL_USER} WHERE isUserLogin=1")
     fun getUserLogin() : LiveData<User?>

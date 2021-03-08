@@ -16,4 +16,7 @@
     <string name="btn_login">Login</string>
     <string name="prompt_please_login">Login to create &amp; share your own maps with your favorite spots!</string>
     <string name="btn_logout">Logout</string>
+    <string name="label_recommended">Recommended</string>
+    <string name="label_latest">Latest/Trends</string>
+    <string name="label_my_maps">My Uebermaps</string>
 </resources>

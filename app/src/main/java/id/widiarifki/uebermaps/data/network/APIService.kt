@@ -13,22 +13,36 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 interface APIService {
-
-    @GET("trends/recommended")
-    suspend fun getRecommendedMaps() : ListResponse<Maps>
-
-    @GET("trends/latest")
-    suspend fun getLatestMaps() : ListResponse<Maps>
 
     @GET("authentication")
     suspend fun loginUser(
         @Query("user[email]") email: String?,
         @Query("user[password]") password: String?
     ) : ObjectResponse<User>
+
+    @GET("trends/recommended")
+    suspend fun getRecommendedMaps(
+        @Query("page") page: Int? = 1,
+        @Query("count") count: Int? = 10
+    ) : ListResponse<Maps>
+
+    @GET("trends/latest")
+    suspend fun getLatestMaps(
+        @Query("page") page: Int? = 1,
+        @Query("count") count: Int? = 10
+    ) : ListResponse<Maps>
+
+    @GET("users/{user_id}/maps")
+    suspend fun getMyMaps(
+        @Path("user_id") user_id: Int?,
+        @Query("page") page: Int? = 1,
+        @Query("count") count: Int? = 10
+    ) : ListResponse<Maps>
 
     companion object {
         fun create(context: Context) : APIService {

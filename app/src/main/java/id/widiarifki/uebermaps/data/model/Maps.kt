@@ -1,5 +1,9 @@
 package id.widiarifki.uebermaps.data.model
 
+import android.view.View
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.google.gson.annotations.SerializedName
 
 data class Maps(
@@ -25,4 +29,23 @@ data class Maps(
     var user: User?,
     @SerializedName("visibility")
     var visibility: String?
-)
+) {
+
+    companion object {
+
+        @JvmStatic @BindingAdapter("app:imageUrl")
+        fun setImageUrl(view: View, value: String?) {
+            when (view) {
+                is ImageView -> {
+                    value?.let {
+                        Glide.with(view)
+                            .load(it)
+                            .centerCrop()
+                            .into(view)
+                    }
+                }
+            }
+        }
+    }
+
+}

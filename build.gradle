@@ -30,6 +30,7 @@ buildscript {
         junitTestExt_version = "1.1.2"
         espresso_version = "3.3.0"
         intuit_sdp_version = "1.0.6"
+        glide_version = "4.11.0"
     }
 
     repositories {

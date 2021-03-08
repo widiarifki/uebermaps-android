@@ -1,16 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
+        <import type="android.view.View"/>
         <variable
-            name="text"
-            type="String" />
+            name="viewModel"
+            type="id.widiarifki.uebermaps.presentation.main.home.HomeViewModel" />
+        <variable
+            name="accountViewModel"
+            type="id.widiarifki.uebermaps.presentation.main.account.AccountViewModel" />
     </data>
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{text}"/>
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Recommended -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                style="@style/section">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    style="@style/section_header">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/label_recommended"
+                        style="@style/section_title"/>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/home_list_item_card_height"
+                        android:layout_centerInParent="true"
+                        android:visibility="@{viewModel.recommendedMaps.loading ? View.VISIBLE : View.VISIBLE, default=visible}"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvRecommendedMaps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{viewModel.recommendedMaps.loading ? View.GONE : View.VISIBLE, default=gone}"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- Latest/Trends  -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                style="@style/section">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    style="@style/section_header">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/label_latest"
+                        style="@style/section_title"/>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/home_list_item_card_height"
+                        android:layout_centerInParent="true"
+                        android:visibility="@{viewModel.latestMaps.loading ? View.VISIBLE : View.VISIBLE, default=visible}"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvLatestMaps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{viewModel.latestMaps.loading ? View.GONE : View.VISIBLE, default=gone}"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{accountViewModel.userLogin.data != null ? "visible" : "gone", default=gone}'/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{accountViewModel.userLogin.data.name.toString()}'/>
+            <!-- My Maps -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                style="@style/section"
+                android:visibility="@{accountViewModel.userLogin.data != null ? View.VISIBLE : View.GONE, default=gone}">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    style="@style/section_header">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/label_my_maps"
+                        style="@style/section_title"/>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/home_list_item_card_height"
+                        android:layout_centerInParent="true"
+                        android:visibility="@{viewModel.myMaps.loading ? View.VISIBLE : View.VISIBLE, default=visible}"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvMyMaps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{viewModel.myMaps.loading ? View.GONE : View.VISIBLE, default=gone}"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

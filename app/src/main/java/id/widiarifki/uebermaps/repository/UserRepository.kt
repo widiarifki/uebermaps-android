@@ -39,7 +39,16 @@ class UserRepository
 
     private suspend fun saveLoginUser(user: User?) {
         try {
-            userDao.insert(user.also { it?.isUserLogin = true })
+            user?.let {
+                userDao.insert(it.also {
+                    it.isUserLogin = true
+                })
+
+                // TODO: data login dibuat 1 source dari room
+                it.id?.let { id ->
+                    PreferenceHelper.instance()?.saveInt(PreferenceConstant.PARAM_USER_ID, id)
+                }
+            }
         } catch (e: Exception) {
             throw (e)
         }
@@ -52,6 +61,8 @@ class UserRepository
         delay(1000) // pretend logout process need to call API also
         try {
             userDao.deleteUserLogin()
+            // TODO: data login dibuat 1 source dari room
+            PreferenceHelper.instance()?.clearSession()
             liveData.success()
         } catch (e: Exception) {
             liveData.error(e)

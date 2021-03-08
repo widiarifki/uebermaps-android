@@ -2,4 +2,6 @@
 <resources>
     <dimen name="bottomnav_height">@dimen/_42sdp</dimen>
     <dimen name="edittext_search_height">@dimen/_36sdp</dimen>
+    <dimen name="home_list_item_card_width">@dimen/_230sdp</dimen>
+    <dimen name="home_list_item_card_height">@dimen/_100sdp</dimen>
 </resources>

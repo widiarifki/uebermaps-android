@@ -9,7 +9,6 @@ class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
         PreferenceHelper.init(applicationContext)
     }
 

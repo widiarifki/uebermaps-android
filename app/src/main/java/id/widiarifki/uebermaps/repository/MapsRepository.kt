@@ -1,6 +1,11 @@
 package id.widiarifki.uebermaps.repository
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asFlow
+import id.widiarifki.uebermaps.data.local.dao.UserDao
 import id.widiarifki.uebermaps.data.model.Maps
+import id.widiarifki.uebermaps.data.model.User
 import id.widiarifki.uebermaps.data.network.APIService
 import id.widiarifki.uebermaps.helper.PreferenceConstant
 import id.widiarifki.uebermaps.helper.PreferenceHelper
@@ -9,7 +14,8 @@ import javax.inject.Inject
 
 class MapsRepository
 @Inject constructor(
-    private val apiService: APIService
+    private val apiService: APIService,
+    private val userDao: UserDao
 ){
 
     suspend fun getRecommendedMaps(page: Int?) : StatedLiveData<List<Maps>>
@@ -40,12 +46,12 @@ class MapsRepository
     {
         val liveData = StatedLiveData<List<Maps>>()
         try {
-            // TODO: param user_id dibuat 1 source dari room
-            val request = apiService.getMyMaps(
-                PreferenceHelper.instance()?.getInt(PreferenceConstant.PARAM_USER_ID),
-                page
-            )
-            liveData.load(request.data)
+            userDao.getUserLoginSync()?.let {
+                val request = apiService.getMyMaps(it.id, page)
+                liveData.load(request.data)
+            } ?: run {
+                liveData.load(null)
+            }
         } catch (e: Exception) {
             liveData.error(e)
         }

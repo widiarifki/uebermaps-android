@@ -19,7 +19,7 @@ class HomeFragment: Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val homeViewModel: HomeViewModel by viewModels()
-    private val accountViewModel: AccountViewModel by viewModels()
+    //private val accountViewModel: AccountViewModel by viewModels()
     private val recommendedMapsAdapter = HorizontalListAdapter()
     private val latestMapsAdapter = HorizontalListAdapter()
     private val myMapsAdapter = HorizontalListAdapter()
@@ -75,7 +75,14 @@ class HomeFragment: Fragment() {
             }
         }
 
-        accountViewModel.userLogin.observe(viewLifecycleOwner) { userLoginState ->
+        homeViewModel.myMaps.observe(viewLifecycleOwner) {
+            Log.v("userMaps", it.status_code.toString())
+            if (it.isSuccess()) {
+                myMapsAdapter.submitList(it.data)
+            }
+        }
+
+        /*accountViewModel.userLogin.observe(viewLifecycleOwner) { userLoginState ->
             Log.v("userLoginState", userLoginState.status_code.toString())
             Log.v("userLoginState", (if (userLoginState.data != null) "visible" else "gone").toString())
             if (userLoginState.isSuccess() && userLoginState.data != null) {
@@ -85,7 +92,7 @@ class HomeFragment: Fragment() {
                     }
                 }
             }
-        }
+        }*/
     }
 
 }

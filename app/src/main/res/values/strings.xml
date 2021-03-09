@@ -19,4 +19,6 @@
     <string name="label_recommended">Recommended</string>
     <string name="label_latest">Latest/Trends</string>
     <string name="label_my_maps">My Uebermaps</string>
+    <string name="empty_my_maps">You haven\'t added your own maps</string>
+    <string name="add_my_map">Add my map</string>
 </resources>

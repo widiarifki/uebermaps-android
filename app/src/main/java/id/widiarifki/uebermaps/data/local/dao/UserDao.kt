@@ -16,6 +16,9 @@ interface UserDao {
     @Query("SELECT * FROM ${DbConstant.TBL_USER} WHERE isUserLogin=1")
     fun getUserLogin() : LiveData<User?>
 
+    @Query("SELECT * FROM ${DbConstant.TBL_USER} WHERE isUserLogin=1")
+    suspend fun getUserLoginSync() : User?
+
     @Query("DELETE FROM ${DbConstant.TBL_USER} WHERE isUserLogin=1")
     suspend fun deleteUserLogin()
 

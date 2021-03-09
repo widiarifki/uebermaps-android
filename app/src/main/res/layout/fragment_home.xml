@@ -43,7 +43,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/home_list_item_card_height"
                         android:layout_centerInParent="true"
-                        android:visibility="@{viewModel.recommendedMaps.loading ? View.VISIBLE : View.VISIBLE, default=visible}"/>
+                        android:visibility="@{viewModel.recommendedMaps.loading ? View.VISIBLE : View.INVISIBLE, default=visible}"/>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvRecommendedMaps"
                         android:layout_width="wrap_content"
@@ -77,7 +77,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/home_list_item_card_height"
                         android:layout_centerInParent="true"
-                        android:visibility="@{viewModel.latestMaps.loading ? View.VISIBLE : View.VISIBLE, default=visible}"/>
+                        android:visibility="@{viewModel.latestMaps.loading ? View.VISIBLE : View.INVISIBLE, default=visible}"/>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvLatestMaps"
                         android:layout_width="wrap_content"
@@ -86,22 +86,18 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text='@{accountViewModel.userLogin.data != null ? "visible" : "gone", default=gone}'/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text='@{accountViewModel.userLogin.data.name.toString()}'/>
             <!-- My Maps -->
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 style="@style/section"
-                android:visibility="@{accountViewModel.userLogin.data != null ? View.VISIBLE : View.GONE, default=gone}">
+                android:visibility="@{accountViewModel.userLogin.data != null ? View.VISIBLE : View.GONE, default=visible}">-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                style="@style/section">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -121,12 +117,30 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/home_list_item_card_height"
                         android:layout_centerInParent="true"
-                        android:visibility="@{viewModel.myMaps.loading ? View.VISIBLE : View.VISIBLE, default=visible}"/>
+                        android:visibility="@{viewModel.myMaps.loading ? View.VISIBLE : View.INVISIBLE, default=visible}"/>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvMyMaps"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="@{viewModel.myMaps.loading ? View.GONE : View.VISIBLE, default=gone}"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:visibility="@{!viewModel.myMaps.loading &amp;&amp; (viewModel.myMaps.empty || viewModel.myMaps.error) ? View.VISIBLE : View.GONE, default=visible}">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.myMaps.empty ? @string/empty_my_maps : viewModel.myMaps.message, default=@string/empty_my_maps}"
+                            style="@style/TextAppearance.AppCompat.Medium"/>
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_my_map"
+                            android:visibility="@{viewModel.myMaps.empty ? View.VISIBLE : View.GONE}"/>
+                    </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>
 

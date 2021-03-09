@@ -31,11 +31,6 @@ class StatedLiveData<T> : MediatorLiveData<Resource<T>>() {
         postValue(state)
     }
 
-    fun empty() {
-        state = Resource.empty()
-        postValue(state)
-    }
-
     fun error(message: String?) {
         state = Resource.error(message)
         postValue(state)

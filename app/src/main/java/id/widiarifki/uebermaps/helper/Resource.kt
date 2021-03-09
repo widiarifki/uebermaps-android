@@ -27,7 +27,7 @@ open class Resource<T> (
     }
 
     fun isEmpty(): Boolean {
-        return status_code == STATE_EMPTY
+        return status_code == STATE_SUCCESS && (data == null || (data as? Collection<*>)?.isEmpty() == true)
     }
 
     fun isLoaded(): Boolean {
@@ -35,14 +35,13 @@ open class Resource<T> (
     }
 
     fun isNotLoaded(): Boolean {
-        return status_code == STATE_LOADING || status_code == STATE_ERROR || status_code == STATE_EMPTY
+        return status_code == STATE_LOADING || status_code == STATE_ERROR
     }
 
     companion object {
         const val STATE_LOADING = 1
         const val STATE_SUCCESS = 2
         const val STATE_ERROR = 3
-        const val STATE_EMPTY = 4
 
         fun <T> loading(): Resource<T> {
             return Resource(STATE_LOADING)
@@ -54,10 +53,6 @@ open class Resource<T> (
 
         fun <T> success(): Resource<T> {
             return Resource(STATE_SUCCESS)
-        }
-
-        fun <T> empty(): Resource<T> {
-            return Resource(STATE_EMPTY)
         }
 
         fun <T> error(message: String?): Resource<T> {

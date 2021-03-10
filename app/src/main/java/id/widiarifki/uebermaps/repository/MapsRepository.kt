@@ -1,15 +1,17 @@
 package id.widiarifki.uebermaps.repository
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asFlow
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import id.widiarifki.uebermaps.data.local.dao.UserDao
+import id.widiarifki.uebermaps.data.model.Attachment
 import id.widiarifki.uebermaps.data.model.Maps
-import id.widiarifki.uebermaps.data.model.User
+import id.widiarifki.uebermaps.data.model.Spot
 import id.widiarifki.uebermaps.data.network.APIService
-import id.widiarifki.uebermaps.helper.PreferenceConstant
-import id.widiarifki.uebermaps.helper.PreferenceHelper
 import id.widiarifki.uebermaps.helper.StatedLiveData
+import id.widiarifki.uebermaps.repository.pagingsource.MediaPagingSource
+import id.widiarifki.uebermaps.repository.pagingsource.SpotsPagingSource
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MapsRepository
@@ -56,5 +58,45 @@ class MapsRepository
             liveData.error(e)
         }
         return liveData
+    }
+
+    suspend fun getDetail(id: Int?): StatedLiveData<Maps>
+    {
+        val liveData = StatedLiveData<Maps>()
+        try {
+            val request = apiService.getMapDetail(id)
+            liveData.load(request.data)
+        } catch (e: Exception) {
+            liveData.error(e)
+        }
+        return liveData
+    }
+
+    suspend fun getMapSpots(mapId: Int?): StatedLiveData<List<Spot>>
+    {
+        val liveData = StatedLiveData<List<Spot>>()
+        try {
+            val request = apiService.getMapSpots(mapId)
+            liveData.load(request.data)
+        } catch (e: Exception) {
+            liveData.error(e)
+        }
+        return liveData
+    }
+
+    fun getMapSpotsPaging(mapId: Int?): Flow<PagingData<Spot>>
+    {
+        return Pager(
+            config = PagingConfig(pageSize = 10, enablePlaceholders = false),
+            pagingSourceFactory = { SpotsPagingSource(apiService, mapId) }
+        ).flow
+    }
+
+    fun getMapAttachmentsPaging(mapId: Int?): Flow<PagingData<Attachment>>
+    {
+        return Pager(
+            config = PagingConfig(pageSize = 10, enablePlaceholders = false),
+            pagingSourceFactory = { MediaPagingSource(apiService, mapId) }
+        ).flow
     }
 }

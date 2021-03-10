@@ -4,4 +4,5 @@
     <dimen name="edittext_search_height">@dimen/_36sdp</dimen>
     <dimen name="home_list_item_card_width">@dimen/_230sdp</dimen>
     <dimen name="home_list_item_card_height">@dimen/_100sdp</dimen>
+    <dimen name="map_detail_backdrop_img_height">@dimen/_200sdp</dimen>
 </resources>

@@ -6,18 +6,21 @@
         <variable
             name="maps"
             type="id.widiarifki.uebermaps.data.model.Maps" />
+        <variable
+            name="viewListener"
+            type="id.widiarifki.uebermaps.presentation.main.home.adapters.HorizontalListAdapter.ItemViewListener" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardElevation="@dimen/_1sdp"
-        app:cardCornerRadius="@dimen/_5sdp">
+        app:cardCornerRadius="@dimen/_5sdp"
+        android:onClick="@{() -> viewListener.onClick(maps)}"
+        style="@style/clickable">
         <RelativeLayout
             android:layout_width="@dimen/home_list_item_card_width"
-            android:layout_height="@dimen/home_list_item_card_height"
-            android:id="@+id/content"
-            style="@style/clickable">
+            android:layout_height="@dimen/home_list_item_card_height">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

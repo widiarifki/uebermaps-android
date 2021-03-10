@@ -9,20 +9,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import id.widiarifki.uebermaps.R
+import id.widiarifki.uebermaps.data.model.Maps
 import id.widiarifki.uebermaps.databinding.FragmentHomeBinding
 import id.widiarifki.uebermaps.helper.SpacedItemDecoration
-import id.widiarifki.uebermaps.presentation.main.account.AccountViewModel
+import id.widiarifki.uebermaps.presentation.RootActivity
 import id.widiarifki.uebermaps.presentation.main.home.adapters.HorizontalListAdapter
 
 @AndroidEntryPoint
-class HomeFragment: Fragment() {
+class HomeFragment: Fragment(), HorizontalListAdapter.ItemViewListener {
 
     private lateinit var binding: FragmentHomeBinding
     private val homeViewModel: HomeViewModel by viewModels()
-    //private val accountViewModel: AccountViewModel by viewModels()
-    private val recommendedMapsAdapter = HorizontalListAdapter()
-    private val latestMapsAdapter = HorizontalListAdapter()
-    private val myMapsAdapter = HorizontalListAdapter()
+    private val recommendedMapsAdapter = HorizontalListAdapter(this)
+    private val latestMapsAdapter = HorizontalListAdapter(this)
+    private val myMapsAdapter = HorizontalListAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,18 +82,14 @@ class HomeFragment: Fragment() {
                 myMapsAdapter.submitList(it.data)
             }
         }
+    }
 
-        /*accountViewModel.userLogin.observe(viewLifecycleOwner) { userLoginState ->
-            Log.v("userLoginState", userLoginState.status_code.toString())
-            Log.v("userLoginState", (if (userLoginState.data != null) "visible" else "gone").toString())
-            if (userLoginState.isSuccess() && userLoginState.data != null) {
-                homeViewModel.myMaps.observe(viewLifecycleOwner) {
-                    if (it.isSuccess()) {
-                        myMapsAdapter.submitList(it.data)
-                    }
-                }
-            }
-        }*/
+    override fun onClick(data: Maps?) {
+        data?.id?.let {
+            val args = Bundle()
+            args.putInt("mapId", it)
+            (activity as? RootActivity)?.navigateRootHostTo(R.id.action_mainFragment_to_mapDetailFragment, args)
+        }
     }
 
 }

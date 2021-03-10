@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import id.widiarifki.uebermaps.R
 import id.widiarifki.uebermaps.databinding.FragmentAuthBinding
-import id.widiarifki.uebermaps.presentation.main.MainFragment
+import id.widiarifki.uebermaps.presentation.RootActivity
 
 class AuthFragment : Fragment() {
 
@@ -28,10 +26,7 @@ class AuthFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.btnGotoLogin.setOnClickListener {
-            activity?.findNavController(R.id.rootNavHostFragment)?.navigate(R.id.action_mainFragment_to_loginFragment)
-            //parentFragment?.findNavController()?.navigate(R.id.action_mainFragment_to_loginFragment)
-            /*val a = parentFragment
-            (parentFragment as? MainFragment)?.navigateToLogin()*/
+            (activity as? RootActivity)?.navigateRootHostTo(R.id.action_mainFragment_to_loginFragment)
         }
     }
 

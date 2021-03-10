@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Maps(
     @SerializedName("counts")
-    var counts: Counts?,
+    var counts: Count?,
     @SerializedName("created_at")
     var createdAt: String?,
     @SerializedName("description")

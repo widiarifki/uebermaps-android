@@ -23,5 +23,18 @@
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
             app:destination="@id/loginFragment"/>
+        <action
+            android:id="@+id/action_mainFragment_to_mapDetailFragment"
+            app:destination="@id/mapDetailFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapDetailFragment"
+        android:name="id.widiarifki.uebermaps.presentation.map.detail.MapDetailFragment"
+        android:label="Detail Map"
+        tools:layout="@layout/fragment_map_detail">
+        <argument
+            android:name="mapId"
+            app:argType="integer" />
     </fragment>
 </navigation>

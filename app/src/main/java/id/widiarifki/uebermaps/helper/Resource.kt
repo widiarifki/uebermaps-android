@@ -30,10 +30,6 @@ open class Resource<T> (
         return status_code == STATE_SUCCESS && (data == null || (data as? Collection<*>)?.isEmpty() == true)
     }
 
-    fun isLoaded(): Boolean {
-        return status_code == STATE_SUCCESS
-    }
-
     fun isNotLoaded(): Boolean {
         return status_code == STATE_LOADING || status_code == STATE_ERROR
     }

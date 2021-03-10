@@ -21,4 +21,8 @@
     <string name="label_my_maps">My Uebermaps</string>
     <string name="empty_my_maps">You haven\'t added your own maps</string>
     <string name="add_my_map">Add my map</string>
+    <string name="msg_loading_map_detail">Loading map..</string>
+    <string name="label_spots">Spots</string>
+    <string name="label_media">Media</string>
+    <string name="label_comment">Comments</string>
 </resources>

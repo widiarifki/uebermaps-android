@@ -2,7 +2,9 @@ package id.widiarifki.uebermaps.data.network
 
 import android.content.Context
 import id.widiarifki.uebermaps.BuildConfig
+import id.widiarifki.uebermaps.data.model.Attachment
 import id.widiarifki.uebermaps.data.model.Maps
+import id.widiarifki.uebermaps.data.model.Spot
 import id.widiarifki.uebermaps.data.model.User
 import id.widiarifki.uebermaps.data.network.interceptor.ConnectivityInterceptor
 import id.widiarifki.uebermaps.data.network.response.wrapper.ListResponse
@@ -43,6 +45,25 @@ interface APIService {
         @Query("page") page: Int? = 1,
         @Query("count") count: Int? = 10
     ) : ListResponse<Maps>
+
+    @GET("maps/{id}")
+    suspend fun getMapDetail(
+        @Path("id") id: Int?
+    ) : ObjectResponse<Maps>
+
+    @GET("maps/{id}/spots")
+    suspend fun getMapSpots(
+        @Path("id") id: Int?,
+        @Query("page") page: Int? = 1,
+        @Query("count") count: Int = 5
+    ) : ListResponse<Spot>
+
+    @GET("maps/{id}/attachments")
+    suspend fun getMapAttachments(
+        @Path("id") id: Int?,
+        @Query("page") page: Int? = 1,
+        @Query("count") count: Int = 15
+    ) : ListResponse<Attachment>
 
     companion object {
         fun create(context: Context) : APIService {

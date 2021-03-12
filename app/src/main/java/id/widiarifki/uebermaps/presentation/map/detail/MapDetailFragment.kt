@@ -1,9 +1,7 @@
 package id.widiarifki.uebermaps.presentation.map.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -20,7 +18,6 @@ import id.widiarifki.uebermaps.databinding.FragmentMapDetailBinding
 class MapDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentMapDetailBinding
-    private lateinit var pagerAdapter: MapDetailPagerAdapter
     private val mapDetalViewModel: MapDetailViewModel by viewModels()
     private val args: MapDetailFragmentArgs by navArgs()
 
@@ -35,23 +32,30 @@ class MapDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupView()
+        subscribeView()
+    }
 
-        pagerAdapter = MapDetailPagerAdapter(this, args.toBundle())
-
+    private fun setupView() {
         binding.apply {
-            viewModel = mapDetalViewModel
-            lifecycleOwner = viewLifecycleOwner
-
             // Setup toolbar
             toolbar.setNavigationOnClickListener {
-                view.findNavController().navigateUp() // TODO buat sbg method umum
+                view?.findNavController()?.navigateUp()
             }
 
             // Setup viewpager
+            val pagerAdapter = MapDetailPagerAdapter(this@MapDetailFragment, args.toBundle())
             viewPager.adapter = pagerAdapter
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = pagerAdapter.getTitle(position)
             }.attach()
+        }
+    }
+
+    private fun subscribeView() {
+        binding.apply {
+            viewModel = mapDetalViewModel
+            lifecycleOwner = viewLifecycleOwner
         }
     }
 

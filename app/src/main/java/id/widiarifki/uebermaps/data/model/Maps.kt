@@ -1,5 +1,6 @@
 package id.widiarifki.uebermaps.data.model
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -38,10 +39,14 @@ data class Maps(
             when (view) {
                 is ImageView -> {
                     value?.let {
-                        Glide.with(view)
-                            .load(it)
-                            .centerCrop()
-                            .into(view)
+                        val builder = Glide.with(view).load(it)
+                        builder.centerCrop()
+                        /*when (view.scaleType) {
+                            ImageView.ScaleType.FIT_CENTER -> builder.fitCenter()
+                            ImageView.ScaleType.CENTER_CROP -> builder.centerCrop()
+                            else -> builder.centerCrop()
+                        }*/
+                        builder.into(view)
                     }
                 }
             }

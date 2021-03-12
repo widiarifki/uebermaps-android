@@ -1,38 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="id.widiarifki.uebermaps.presentation.map.detail.MapDetailViewModel" />
     </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
+
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/collapse_toolbar_height"
-            android:fitsSystemWindows="true">
+            android:layout_height="wrap_content">
+
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true">
-                <ImageView
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="@{viewModel.mapDetail.data.title, default=Title}"
+                app:titleEnabled="false"
+                app:toolbarId="@id/toolbar"
+                app:collapsedTitleGravity="center"
+                app:expandedTitleGravity="center"
+                android:background="@android:color/transparent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/map_detail_backdrop_img_height">
+                    <ImageView
+                        android:id="@+id/imgBackdrop"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/imgBackdropGradient"
+                        app:layout_constraintTop_toTopOf="@id/imgBackdropGradient"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:scaleType="centerCrop"
+                        app:imageUrl="@{viewModel.mapDetail.data.pictureUrl}"/>
+                    <View
+                        android:id="@+id/imgBackdropGradient"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@color/black_op50"/>
+                    <LinearLayout
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="?attr/actionBarSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/_10sdp"
+                        android:paddingVertical="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:visibility="@{viewModel.mapDetail.notLoaded ? View.GONE : View.VISIBLE, default=visible}">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/TextAppearance.AppCompat.Medium.Inverse"
+                            android:gravity="center"
+                            android:text='@{viewModel.mapDetail.data.description, default=Description}'
+                            tools:text="Description"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            style="@style/TextAppearance.AppCompat.Caption"
+                            android:textColor="@color/light_gray"
+                            android:text='@{String.format(@string/format_label_map_type, viewModel.mapDetail.data.visibility ?? "Loading" )}'
+                            android:textAllCaps="true"
+                            tools:text="Public Map"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:orientation="horizontal"
+                            android:gravity="center_horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/light_gray"
+                                tools:text="0 Spots"
+                                android:text='@{String.format(@string/format_label_count_spots, viewModel.mapDetail.data.counts.spots ?? "0" )}'/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/_3sdp"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/light_gray"
+                                android:text="|"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/light_gray"
+                                tools:text="0 Views"
+                                android:text='@{String.format(@string/format_label_count_views, viewModel.mapDetail.data.counts.impressions ?? "0")}'/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <include
+                        android:id="@+id/loadingStateLayout"
+                        layout="@layout/loading_state_layout"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="@{viewModel.mapDetail.notLoaded ? View.VISIBLE : View.GONE, default=gone}"
+                        app:isLoading="@{viewModel.mapDetail.loading}"
+                        app:message="@{viewModel.mapDetail.message}"
+                        app:retryCallback="@{viewModel.onRetryClicked}"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:fitsSystemWindows="true"
-                    app:imageUrl="@{viewModel.mapDetail.data.pictureUrl}"/>
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@android:color/transparent"
-                    style="@style/Widget.MaterialComponents.Toolbar.Primary"
-                    app:title="@{viewModel.mapDetail.data.title, default=@string/msg_loading_map_detail}"
-                    app:titleTextColor="@color/white"/>
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="pin">
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@android:color/transparent"
+                        app:navigationIcon="@drawable/ic_action_arrow_back"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/_72sdp"
+                        android:gravity="center"
+                        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:text="@{viewModel.mapDetail.data.title, default=Title}"/>
+                </RelativeLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways">
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="pin"/>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
         </com.google.android.material.appbar.AppBarLayout>
+
+
+        <!-- Scrollview -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

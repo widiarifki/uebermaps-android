@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-
-</RelativeLayout>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="id"
+            type="java.lang.Integer" />
+    </data>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="comment"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{id.toString()}"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. This is very long text you won't believe. "/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

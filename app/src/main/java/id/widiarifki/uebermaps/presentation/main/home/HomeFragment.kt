@@ -77,7 +77,6 @@ class HomeFragment: Fragment(), HorizontalListAdapter.ItemViewListener {
         }
 
         homeViewModel.myMaps.observe(viewLifecycleOwner) {
-            Log.v("userMaps", it.status_code.toString())
             if (it.isSuccess()) {
                 myMapsAdapter.submitList(it.data)
             }

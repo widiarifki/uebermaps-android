@@ -25,4 +25,10 @@
     <string name="label_spots">Spots</string>
     <string name="label_media">Media</string>
     <string name="label_comment">Comments</string>
+    <string name="msg_empty_spot">No spots found on this map</string>
+    <string name="format_label_map_type">%s Map</string>
+    <string name="format_label_count_spots">%s Spots</string>
+    <string name="format_label_count_views">%s Views</string>
+    <string name="msg_empty_media">No media found</string>
+    <string name="label_loading">Loading</string>
 </resources>

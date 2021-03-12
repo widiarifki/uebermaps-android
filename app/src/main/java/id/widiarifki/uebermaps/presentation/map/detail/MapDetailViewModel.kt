@@ -1,5 +1,7 @@
 package id.widiarifki.uebermaps.presentation.map.detail
 
+import android.view.View
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,6 +21,7 @@ class MapDetailViewModel
 ): ViewModel() {
 
     val mapDetail = StatedLiveData<Maps>()
+    val mapDetail2 = MutableLiveData<Maps>()
 
     // Figures another simpler way to getting mapId parameter
     private val mapId = savedStateHandle.get<Int>("mapId")
@@ -38,5 +41,9 @@ class MapDetailViewModel
                 }
             }
         }
+    }
+
+    fun onRetryClicked() : View.OnClickListener {
+        return View.OnClickListener { getMapDetail() }
     }
 }

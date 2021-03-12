@@ -15,7 +15,7 @@
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
-    <style name="clickable">
+    <style name="Clickable">
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>

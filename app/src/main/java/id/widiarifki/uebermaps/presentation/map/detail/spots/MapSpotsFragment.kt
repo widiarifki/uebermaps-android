@@ -1,20 +1,21 @@
 package id.widiarifki.uebermaps.presentation.map.detail.spots
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.widiarifki.uebermaps.R
 import id.widiarifki.uebermaps.databinding.FragmentMapSpotsBinding
 import id.widiarifki.uebermaps.helper.PagingLoadStateAdapter
-import id.widiarifki.uebermaps.helper.SpacedItemDecoration
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -36,7 +37,7 @@ class MapSpotsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
+        setupView()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -44,31 +45,38 @@ class MapSpotsFragment : Fragment() {
         observeData()
     }
 
-    private fun setupRecyclerView() {
-        binding.rvSpots.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = mapSpotsPagingAdapter.withLoadStateHeaderAndFooter(
-                header = PagingLoadStateAdapter{ mapSpotsPagingAdapter.retry()},
-                footer = PagingLoadStateAdapter{ mapSpotsPagingAdapter.retry()}
-            )
-            addItemDecoration(SpacedItemDecoration(context))
+    private fun setupView() {
+        binding.apply {
+            rvSpots.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = mapSpotsPagingAdapter.withLoadStateHeaderAndFooter(
+                    header = PagingLoadStateAdapter { mapSpotsPagingAdapter.retry() },
+                    footer = PagingLoadStateAdapter { mapSpotsPagingAdapter.retry() }
+                )
+                addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
+            }
         }
     }
 
     private fun observeData() {
         lifecycleScope.launch {
-            mapSpotsViewModel.pagingMapSpots.onEach {
-                Log.v("CURRENTPAGE-onEach", it.toString())
-            }.onCompletion {
-                Log.v("CURRENTPAGE-onComplet", "1")
-            }.onEmpty {
-                Log.v("CURRENTPAGE-onEmpty", "1")
-            }.onStart {
-                Log.v("CURRENTPAGE-onStart", "1")
-            }.catch {
-                Log.v("CURRENTPAGE-catch", "1")
-            }.collectLatest {
+            mapSpotsViewModel.pagingMapSpots.collectLatest {
                 mapSpotsPagingAdapter.submitData(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            mapSpotsPagingAdapter.loadStateFlow.collectLatest { state ->
+                with(state.refresh) {
+                    binding.isLoading = this is LoadState.Loading && mapSpotsPagingAdapter.itemCount == 0
+                    binding.isError = (this is LoadState.Error || this is LoadState.NotLoading) && mapSpotsPagingAdapter.itemCount == 0
+                    (this as? LoadState.Error)?.error?.message?.let {
+                        binding.message = it
+                    } ?: run {
+                        binding.message = getString(R.string.msg_empty_spot)
+                    }
+                    binding.retryCallback = View.OnClickListener { mapSpotsPagingAdapter.retry() }
+                }
             }
         }
     }

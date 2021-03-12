@@ -6,7 +6,7 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import id.widiarifki.uebermaps.R
-import id.widiarifki.uebermaps.databinding.LayoutLoadingStateBinding
+import id.widiarifki.uebermaps.databinding.LoadingStateLayoutBinding
 
 class PagingLoadStateAdapter (
     private val retryCallback: () -> Unit
@@ -28,9 +28,9 @@ class PagingLoadStateAdapter (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_loading_state, parent, false)
-        return LoadStateViewHolder(LayoutLoadingStateBinding.bind(view))
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.loading_state_layout, parent, false)
+        return LoadStateViewHolder(LoadingStateLayoutBinding.bind(view))
     }
 }
 
-class LoadStateViewHolder(val binding: LayoutLoadingStateBinding) : RecyclerView.ViewHolder(binding.root)
+class LoadStateViewHolder(val binding: LoadingStateLayoutBinding) : RecyclerView.ViewHolder(binding.root)

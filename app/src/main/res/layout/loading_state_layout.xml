@@ -6,7 +6,7 @@
         <import type="android.view.View"/>
         <variable name="isLoading" type="Boolean" />
         <variable name="message" type="String" />
-        <variable name="retryCallback" type="kotlin.Unit" />
+        <variable name="retryCallback" type="View.OnClickListener" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,14 +24,15 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorSurface"
                 android:visibility="@{message.length() > 0  ? View.VISIBLE : View.GONE}"
                 android:text='@{message, default="@string/msg_error_global"}'/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnRetry"
-                android:text="@string/btn_retry"/>
+                android:text="@string/btn_retry"
+                android:onClick="@{(view) -> retryCallback.onClick(view)}"/>
         </LinearLayout>
         <ProgressBar
             android:layout_width="wrap_content"

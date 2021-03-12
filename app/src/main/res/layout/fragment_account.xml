@@ -1,33 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.main.account.AccountFragment">
     <data>
         <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="id.widiarifki.uebermaps.presentation.main.account.AccountViewModel" />
     </data>
+
     <RelativeLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:padding="@dimen/_20sdp">
-            <TextView
-                android:layout_width="wrap_content"
+            android:visibility="@{viewModel.userLogin.data != null ? View.VISIBLE : View.GONE, default=visible}">
+
+            <!-- Profile -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.userLogin.data.name, default=Name}"
-                android:visibility="@{viewModel.userLogin.data != null ? View.VISIBLE : View.GONE, default=visible}"/>
-            <Button
-                android:layout_width="wrap_content"
+                android:paddingHorizontal="@dimen/_14sdp"
+                android:paddingVertical="@dimen/_18sdp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_bottom_outline">
+                <ImageView
+                    android:layout_width="@dimen/_56sdp"
+                    android:layout_height="@dimen/_56sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:background="@color/light_gray"
+                    app:imageUrl="@{viewModel.userLogin.data.profilePicture}"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:text="@{viewModel.userLogin.data.name, default=Name}"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:text='@{String.format(@string/format_username, viewModel.userLogin.data.screenName ?? "" )}'
+                    tools:text="Username"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.AppCompat.Caption"
+                        android:text="@{viewModel.userLogin.data.location, default=Location}"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_5sdp"
+                        style="@style/TextAppearance.AppCompat.Caption"
+                        android:text="|"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.AppCompat.Caption"
+                        android:text="@{viewModel.userLogin.data.url, default=Homepage}"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Edit Profile -->
+            <LinearLayout
+                android:id="@+id/btnEditProfile"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Logout"
-                android:visibility="@{viewModel.userLogin.data != null ? View.VISIBLE : View.GONE, default=visible}"
-                android:onClick="@{viewModel.actionLogout}"/>
+                android:paddingHorizontal="@dimen/_14sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:orientation="horizontal"
+                style="@style/Clickable"
+                android:background="@drawable/bg_bottom_outline">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:text="@string/btn_edit_profile"/>
+            </LinearLayout>
+
+            <!-- Edit Password -->
+            <LinearLayout
+                android:id="@+id/btnEditPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_14sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:orientation="horizontal"
+                style="@style/Clickable"
+                android:background="@drawable/bg_bottom_outline">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:text="@string/btn_edit_password"/>
+            </LinearLayout>
+
+            <!-- Logout -->
+            <LinearLayout
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_14sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:onClick="@{viewModel.actionLogout}"
+                style="@style/Clickable"
+                android:background="@drawable/bg_bottom_outline">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:text="@string/btn_logout"/>
+            </LinearLayout>
+
         </LinearLayout>
     </RelativeLayout>
 </layout>

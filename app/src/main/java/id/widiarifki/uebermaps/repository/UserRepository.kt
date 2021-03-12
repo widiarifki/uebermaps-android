@@ -1,11 +1,8 @@
 package id.widiarifki.uebermaps.repository
 
-import android.content.SharedPreferences
-import id.widiarifki.uebermaps.data.local.DbConstant
 import id.widiarifki.uebermaps.data.local.dao.UserDao
 import id.widiarifki.uebermaps.data.model.User
 import id.widiarifki.uebermaps.data.network.APIService
-import id.widiarifki.uebermaps.data.network.response.wrapper.Meta
 import id.widiarifki.uebermaps.helper.PreferenceConstant
 import id.widiarifki.uebermaps.helper.PreferenceHelper
 import id.widiarifki.uebermaps.helper.StatedLiveData
@@ -20,8 +17,7 @@ class UserRepository
 
     val userLogin = userDao.getUserLogin()
 
-    suspend fun loginUser(username: String?, password: String?): StatedLiveData<User>
-    {
+    suspend fun loginUser(username: String?, password: String?): StatedLiveData<User> {
         val liveData = StatedLiveData<User>()
         try {
             val loginRequest = apiService.loginUser(username, password)
@@ -30,6 +26,56 @@ class UserRepository
                 liveData.load(loginRequest.data)
             } else {
                 liveData.error(loginRequest.meta?.errorMessage)
+            }
+        } catch (e: Exception) {
+            liveData.error(e)
+        }
+        return liveData
+    }
+
+    suspend fun logoutUser(): StatedLiveData<User> {
+        val liveData = StatedLiveData<User>()
+
+        delay(1000) // pretend logout process need to call API also
+        try {
+            userDao.deleteUserLogin()
+            // TODO: data login dibuat 1 source dari room
+            PreferenceHelper.instance()?.clearSession()
+            liveData.success()
+        } catch (e: Exception) {
+
+            liveData.error(e)
+        }
+
+        return liveData
+    }
+
+    suspend fun refreshUserLogin() {
+        try {
+            val loginUser = userDao.getUserLoginSync()
+            loginUser?.let {
+                val request = apiService.getUser(it.id)
+                request.data?.let { user ->
+                    saveLoginUser(user)
+                }
+            }
+        } catch (e: Exception) {
+            throw Exception(e)
+        }
+    }
+
+    suspend fun getUser(userId: Int?): StatedLiveData<User> {
+        val liveData = StatedLiveData<User>()
+        try {
+            val request = apiService.getUser(userId)
+            request.data?.let { user ->
+                val loginUser = userDao.getUserLoginSync()
+
+                if (user.id == loginUser?.id) saveLoginUser(request.data)
+
+                liveData.load(request.data)
+            } ?: run {
+                liveData.error(request.meta?.errorMessage)
             }
         } catch (e: Exception) {
             liveData.error(e)
@@ -52,22 +98,5 @@ class UserRepository
         } catch (e: Exception) {
             throw (e)
         }
-    }
-
-    suspend fun logoutUser(): StatedLiveData<User>
-    {
-        val liveData = StatedLiveData<User>()
-
-        delay(1000) // pretend logout process need to call API also
-        try {
-            userDao.deleteUserLogin()
-            // TODO: data login dibuat 1 source dari room
-            PreferenceHelper.instance()?.clearSession()
-            liveData.success()
-        } catch (e: Exception) {
-            liveData.error(e)
-        }
-
-        return liveData
     }
 }

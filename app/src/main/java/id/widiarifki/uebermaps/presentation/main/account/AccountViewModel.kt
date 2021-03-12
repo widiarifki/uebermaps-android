@@ -14,12 +14,16 @@ import javax.inject.Inject
 class AccountViewModel
 @Inject constructor(
     private val userRepository: UserRepository
-): ViewModel() {
+) : ViewModel() {
 
     val userLogin = StatedLiveData<User?>()
+    private val dataRefreshed = false
 
     init {
         getUserLogin()
+        viewModelScope.launch {
+            userRepository.refreshUserLogin()
+        }
     }
 
     private fun getUserLogin() {
@@ -29,8 +33,7 @@ class AccountViewModel
         }
     }
 
-    fun actionLogout(view: View)
-    {
+    fun actionLogout(view: View) {
         viewModelScope.launch {
             userRepository.logoutUser()
         }

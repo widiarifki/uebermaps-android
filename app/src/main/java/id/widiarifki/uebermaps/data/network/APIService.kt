@@ -65,6 +65,11 @@ interface APIService {
         @Query("count") count: Int = 15
     ) : ListResponse<Attachment>
 
+    @GET("users/{id}")
+    suspend fun getUser(
+        @Path("id") id: Int?
+    ) : ObjectResponse<User>
+
     companion object {
         fun create(context: Context) : APIService {
             val httpClient = OkHttpClient.Builder()

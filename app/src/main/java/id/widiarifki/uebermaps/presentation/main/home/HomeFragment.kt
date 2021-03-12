@@ -1,7 +1,6 @@
 package id.widiarifki.uebermaps.presentation.main.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,10 +35,17 @@ class HomeFragment: Fragment(), HorizontalListAdapter.ItemViewListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUI()
+        subscribeUI()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        observeData()
+    }
+
+    private fun setupUI() {
         binding.apply {
-            viewModel = homeViewModel
-            accountViewModel = accountViewModel
-            lifecycleOwner = viewLifecycleOwner
             rvRecommendedMaps.apply {
                 adapter = recommendedMapsAdapter
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -58,9 +64,12 @@ class HomeFragment: Fragment(), HorizontalListAdapter.ItemViewListener {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        observeData()
+    private fun subscribeUI() {
+        binding.apply {
+            viewModel = homeViewModel
+            accountViewModel = accountViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
     }
 
     private fun observeData() {

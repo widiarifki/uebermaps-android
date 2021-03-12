@@ -1,6 +1,7 @@
 package id.widiarifki.uebermaps.presentation.main.account
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,10 +29,30 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUIListener()
+        subscribeUI()
+    }
+
+    private fun setupUIListener() {
+        binding.apply {
+            btnEditProfile.setOnClickListener { onClickEditPassword() }
+            btnEditPassword.setOnClickListener { onClickEditPassword() }
+            btnLogout.setOnClickListener { accountViewModel.actionLogout(it) }
+        }
+    }
+
+    private fun subscribeUI() {
         binding.apply {
             viewModel = accountViewModel
             lifecycleOwner = viewLifecycleOwner
         }
     }
 
+    private fun onClickEditPassword() {
+        Log.v("Action", "edit pass")
+    }
+
+    private fun onClickEditProfile() {
+        Log.v("Action", "edit profile")
+    }
 }

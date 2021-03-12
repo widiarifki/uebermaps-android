@@ -31,4 +31,7 @@
     <string name="format_label_count_views">%s Views</string>
     <string name="msg_empty_media">No media found</string>
     <string name="label_loading">Loading</string>
+    <string name="btn_edit_profile">Edit Profile</string>
+    <string name="btn_edit_password">Edit Password</string>
+    <string name="format_username">\@\%s</string>
 </resources>

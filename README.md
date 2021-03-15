@@ -31,9 +31,14 @@ app
 ├── repository: contains code concerns about how the presentation/view will interact with data
 ├── helper: contains helper classes and objects
 └── BaseApplication.kt
+```
 
 ### Screenshot
-![Screenshot](https://github.com/widiarifki/movie-db/blob/main/_extras/screenshot2.gif?raw=true)
+![Home](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/1.jpg)
+![Detail Map 1](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/2.jpg)
+![Detail Map 2](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/3.jpg)
+![Account](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/4.jpg)
+![Login](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/5.jpg)
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 

@@ -1,6 +1,6 @@
 # Uebermaps Android
 
-The goal is to create an Android client app mimicking [Uebermaps Web][UebermapsWebL] and [UebermapsIOSL][2]
+The goal is to create an Android client app mimicking [Uebermaps Web][UebermapsWebL] and [Uebermaps iOS][UebermapsIOSL]
 
 ### API
 Provided by Uebermaps API ([Link][UebermapsAPIL])
@@ -34,7 +34,11 @@ app
 ```
 
 ### Screenshot
-<img src="https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/1.jpg" width="300">
+<img src="https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/1.jpg" width="250">
+<img src="https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/2.jpg" width="250">
+<img src="https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/3.jpg" width="250">
+<img src="https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/4.jpg" width="250">
+<img src="https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/5.jpg" width="250">
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 

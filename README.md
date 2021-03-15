@@ -1,9 +1,9 @@
 # Uebermaps Android
 
-The goal is to create an Android client app mimicking [Uebermaps Web][1] and [Uebermaps iOS][2]
+The goal is to create an Android client app mimicking [Uebermaps Web][UebermapsWebL] and [UebermapsIOSL][2]
 
 ### API
-Provided by Uebermaps API ([Link][3])
+Provided by Uebermaps API ([Link][UebermapsAPIL])
 
 ### Jetpack Components
 - [Hilt Dependency Injection (v2.31.2-alpha)][HiltL]
@@ -34,17 +34,17 @@ app
 ```
 
 ### Screenshot
-![Home](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/1.jpg)
-![Detail Map 1](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/2.jpg)
-![Detail Map 2](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/3.jpg)
-![Account](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/4.jpg)
-![Login](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/5.jpg)
+![Home](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/1.jpg =300x)
+![Detail Map 1](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/2.jpg =300x)
+![Detail Map 2](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/3.jpg =300x)
+![Account](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/4.jpg =300x)
+![Login](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/5.jpg =300x)
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-    [1]: <https://uebermaps.com/>
-    [2]: <https://itunes.apple.com/app/id929047930/>
-    [3]: <https://uebermaps.com/api/v2>
+   [UebermapsWebL]: <https://uebermaps.com/>
+   [UebermapsIOSL]: <https://itunes.apple.com/app/id929047930/>
+   [UebermapsAPIL]: <https://uebermaps.com/api/v2>
    [RetrofitL]: <https://github.com/square/retrofit>
    [OkHTTPL]: <https://github.com/square/okhttp>
    [GsonL]: <https://github.com/google/gson>

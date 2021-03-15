@@ -1,10 +1,12 @@
 package id.widiarifki.uebermaps.presentation.main.account
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.widiarifki.uebermaps.data.model.User
+import id.widiarifki.uebermaps.helper.Resource
 import id.widiarifki.uebermaps.helper.StatedLiveData
 import id.widiarifki.uebermaps.repository.UserRepository
 import kotlinx.coroutines.launch
@@ -17,7 +19,6 @@ class AccountViewModel
 ) : ViewModel() {
 
     val userLogin = StatedLiveData<User?>()
-    private val dataRefreshed = false
 
     init {
         getUserLogin()
@@ -33,10 +34,16 @@ class AccountViewModel
         }
     }
 
-    fun actionLogout(view: View) {
+    fun logoutUser() : StatedLiveData<User?> {
+        userLogin.loading()
         viewModelScope.launch {
-            userRepository.logoutUser()
+            try {
+                userRepository.logoutUser()
+            } catch (e: Exception) {
+                userLogin.error(e)
+            }
         }
+        return userLogin
     }
 
 }

@@ -40,6 +40,7 @@
             android:id="@+id/fieldPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
             android:hint="@string/hint_password">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

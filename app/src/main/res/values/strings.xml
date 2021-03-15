@@ -34,4 +34,9 @@
     <string name="btn_edit_profile">Edit Profile</string>
     <string name="btn_edit_password">Edit Password</string>
     <string name="format_username">\@\%s</string>
+    <string name="msg_confirm_logout">Are you sure you want to logout?</string>
+    <string name="dialog_action_yes">Yes</string>
+    <string name="dialog_action_no">No</string>
+    <string name="prompt_text_login">Sorry, you need to login to see this feature ^-^</string>
+    <string name="msg_loading_logout">Logging you out..</string>
 </resources>

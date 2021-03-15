@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-        <variable name="msgLoading" type="String" />
+        <variable name="loadingMessage" type="String" />
     </data>
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,6 +26,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@{msgLoading, default=@string/msg_loading_global}" />
+            android:text="@{loadingMessage, default=@string/msg_loading_global}" />
     </LinearLayout>
 </layout>

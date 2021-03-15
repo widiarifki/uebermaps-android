@@ -1,20 +1,10 @@
 package id.widiarifki.uebermaps.helper
 
-import android.util.Log
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Observer
 
-/**
- * MediatorLiveData adalah livedata yang ngedengerin (observe) livedata lain
- */
-class StatedLiveData<T> : MediatorLiveData<Resource<T>>() {
-          
-    lateinit var state: Resource<T>
-    
-    /*init {
-        loading()
-    }*/
+class StatedLiveData<T>(initialState: Resource<T>? = null) : MediatorLiveData<Resource<T>>() {
+
+    var state: Resource<T> = initialState ?: Resource()
 
     fun loading() {
         state = Resource.loading()

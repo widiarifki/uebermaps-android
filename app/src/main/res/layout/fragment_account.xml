@@ -13,6 +13,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +21,7 @@
             android:gravity="center"
             android:visibility="@{viewModel.userLogin.data != null ? View.VISIBLE : View.GONE, default=visible}">
 
-            <!-- Profile -->
+            <!-- Overview Profile -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,7 +72,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Edit Profile -->
+            <!-- Button Edit Profile -->
             <LinearLayout
                 android:id="@+id/btnEditProfile"
                 android:layout_width="match_parent"
@@ -88,7 +89,7 @@
                     android:text="@string/btn_edit_profile"/>
             </LinearLayout>
 
-            <!-- Edit Password -->
+            <!-- Button Edit Password -->
             <LinearLayout
                 android:id="@+id/btnEditPassword"
                 android:layout_width="match_parent"
@@ -105,7 +106,7 @@
                     android:text="@string/btn_edit_password"/>
             </LinearLayout>
 
-            <!-- Logout -->
+            <!-- Button Logout -->
             <LinearLayout
                 android:id="@+id/btnLogout"
                 android:layout_width="match_parent"
@@ -113,7 +114,6 @@
                 android:paddingHorizontal="@dimen/_14sdp"
                 android:paddingVertical="@dimen/_10sdp"
                 android:orientation="horizontal"
-                android:onClick="@{viewModel.actionLogout}"
                 style="@style/Clickable"
                 android:background="@drawable/bg_bottom_outline">
                 <TextView
@@ -122,7 +122,18 @@
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:text="@string/btn_logout"/>
             </LinearLayout>
-
         </LinearLayout>
+
+        <!-- Loading state layout
+        <include
+            android:id="@+id/loadingStateLayout"
+            layout="@layout/loading_state_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="@{viewModel.userLogin.notLoaded ? View.VISIBLE : View.GONE}"
+            app:isLoading="@{viewModel.userLogin.loading}"
+            app:message="@{viewModel.userLogin.message}"/> -->
+
     </RelativeLayout>
 </layout>

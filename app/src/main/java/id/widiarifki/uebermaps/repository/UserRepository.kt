@@ -5,6 +5,7 @@ import id.widiarifki.uebermaps.data.model.User
 import id.widiarifki.uebermaps.data.network.APIService
 import id.widiarifki.uebermaps.helper.PreferenceConstant
 import id.widiarifki.uebermaps.helper.PreferenceHelper
+import id.widiarifki.uebermaps.helper.Resource
 import id.widiarifki.uebermaps.helper.StatedLiveData
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -33,21 +34,15 @@ class UserRepository
         return liveData
     }
 
-    suspend fun logoutUser(): StatedLiveData<User> {
-        val liveData = StatedLiveData<User>()
-
-        delay(1000) // pretend logout process need to call API also
+    suspend fun logoutUser() {
         try {
+            delay(3000) // pretend logout process need to call API as well
             userDao.deleteUserLogin()
             // TODO: data login dibuat 1 source dari room
             PreferenceHelper.instance()?.clearSession()
-            liveData.success()
         } catch (e: Exception) {
-
-            liveData.error(e)
+            throw Exception(e)
         }
-
-        return liveData
     }
 
     suspend fun refreshUserLogin() {

@@ -9,14 +9,14 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import id.widiarifki.uebermaps.R
 import id.widiarifki.uebermaps.base.BaseFragment
-import id.widiarifki.uebermaps.databinding.FragmentMainBinding
+import id.widiarifki.uebermaps.databinding.FragmentNavbarBinding
 import id.widiarifki.uebermaps.presentation.account.AccountViewModel
 
 @AndroidEntryPoint
-class NavbarFragment : BaseFragment<FragmentMainBinding>() {
+class NavbarFragment : BaseFragment<FragmentNavbarBinding>() {
 
     override val resourceLayout: Int
-        get() = R.layout.fragment_main
+        get() = R.layout.fragment_navbar
 
     private var bottomNavController: NavController? = null
     private val accountViewModel: AccountViewModel by viewModels()

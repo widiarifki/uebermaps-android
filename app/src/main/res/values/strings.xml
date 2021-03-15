@@ -37,7 +37,7 @@
     <string name="msg_confirm_logout">Are you sure you want to logout?</string>
     <string name="dialog_action_yes">Yes</string>
     <string name="dialog_action_no">No</string>
-    <string name="prompt_text_login">You need to login to see this feature ^-^</string>
+    <string name="prompt_text_login">Please Login</string>
     <string name="msg_loading_logout">Logging you out..</string>
     <string name="msg_empty_latest_trends">Latest trends map not found</string>
     <string name="msg_empty_recommended">Recommended map not found</string>

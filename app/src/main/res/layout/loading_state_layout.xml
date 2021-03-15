@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btnRetry"
                 android:text="@string/btn_retry"
-                android:visibility="@{enableRetry ? View.VISIBLE : View.GONE, default=visible}"
+                android:visibility="@{(enableRetry ?? true) ? View.VISIBLE : View.GONE, default=visible}"
                 android:onClick="@{(view) -> retryCallback.onClick(view)}"/>
         </LinearLayout>
         <ProgressBar

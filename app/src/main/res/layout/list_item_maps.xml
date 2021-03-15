@@ -8,7 +8,7 @@
             type="id.widiarifki.uebermaps.data.model.Maps" />
         <variable
             name="viewListener"
-            type="id.widiarifki.uebermaps.presentation.main.home.adapters.HorizontalListAdapter.ItemViewListener" />
+            type="id.widiarifki.uebermaps.presentation.home.HorizontalListAdapter.ItemViewListener" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_gravity="center_horizontal"

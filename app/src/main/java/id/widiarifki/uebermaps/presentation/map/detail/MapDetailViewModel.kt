@@ -21,9 +21,7 @@ class MapDetailViewModel
 ): ViewModel() {
 
     val mapDetail = StatedLiveData<Maps>()
-    val mapDetail2 = MutableLiveData<Maps>()
 
-    // Figures another simpler way to getting mapId parameter
     private val mapId = savedStateHandle.get<Int>("mapId")
 
     init {

@@ -17,9 +17,9 @@
     <string name="prompt_please_login">Login to create &amp; share your own maps with your favorite spots!</string>
     <string name="btn_logout">Logout</string>
     <string name="label_recommended">Recommended</string>
-    <string name="label_latest">Latest/Trends</string>
+    <string name="label_latest">Latest trends</string>
     <string name="label_my_maps">My Uebermaps</string>
-    <string name="empty_my_maps">You haven\'t added your own maps</string>
+    <string name="msg_empty_my_maps">You haven\'t added your own maps</string>
     <string name="add_my_map">Add my map</string>
     <string name="msg_loading_map_detail">Loading map..</string>
     <string name="label_spots">Spots</string>
@@ -37,6 +37,8 @@
     <string name="msg_confirm_logout">Are you sure you want to logout?</string>
     <string name="dialog_action_yes">Yes</string>
     <string name="dialog_action_no">No</string>
-    <string name="prompt_text_login">Sorry, you need to login to see this feature ^-^</string>
+    <string name="prompt_text_login">You need to login to see this feature ^-^</string>
     <string name="msg_loading_logout">Logging you out..</string>
+    <string name="msg_empty_latest_trends">Latest trends map not found</string>
+    <string name="msg_empty_recommended">Recommended map not found</string>
 </resources>

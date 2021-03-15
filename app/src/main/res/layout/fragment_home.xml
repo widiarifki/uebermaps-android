@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="id.widiarifki.uebermaps.presentation.main.home.HomeViewModel" />
-        <variable
-            name="accountViewModel"
-            type="id.widiarifki.uebermaps.presentation.main.account.AccountViewModel" />
+            type="id.widiarifki.uebermaps.presentation.home.HomeViewModel" />
     </data>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -38,17 +36,23 @@
                 </LinearLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ProgressBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/home_list_item_card_height"
-                        android:layout_centerInParent="true"
-                        android:visibility="@{viewModel.recommendedMaps.loading ? View.VISIBLE : View.INVISIBLE, default=visible}"/>
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/home_list_item_card_height">
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvRecommendedMaps"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="@{viewModel.recommendedMaps.loading ? View.GONE : View.VISIBLE, default=gone}"/>
+                    <include
+                        layout="@layout/loading_state_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="@{viewModel.recommendedMaps.notLoaded || viewModel.recommendedMaps.empty ? View.VISIBLE : View.INVISIBLE, default=visible}"
+                        app:isLoading="@{viewModel.recommendedMaps.loading}"
+                        app:message="@{viewModel.recommendedMaps.empty ? @string/msg_empty_latest_trends : viewModel.recommendedMaps.message}"
+                        app:enableRetry="@{viewModel.recommendedMaps.notLoaded}"
+                        app:retryCallback="@{viewModel.getRecommendedMaps}"/>
                 </RelativeLayout>
             </LinearLayout>
 
@@ -72,32 +76,33 @@
                 </LinearLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ProgressBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/home_list_item_card_height"
-                        android:layout_centerInParent="true"
-                        android:visibility="@{viewModel.latestMaps.loading ? View.VISIBLE : View.INVISIBLE, default=visible}"/>
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/home_list_item_card_height">
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvLatestMaps"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="@{viewModel.latestMaps.loading ? View.GONE : View.VISIBLE, default=gone}"/>
+                    <include
+                        layout="@layout/loading_state_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="@{viewModel.latestMaps.notLoaded || viewModel.myMaps.empty ? View.VISIBLE : View.INVISIBLE, default=visible}"
+                        app:isLoading="@{viewModel.latestMaps.loading}"
+                        app:message="@{viewModel.latestMaps.empty ? @string/msg_empty_latest_trends : viewModel.latestMaps.message}"
+                        app:enableRetry="@{viewModel.latestMaps.notLoaded}"
+                        app:retryCallback="@{viewModel.getLatestMaps}"/>
                 </RelativeLayout>
             </LinearLayout>
 
             <!-- My Maps -->
-            <!--<LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                style="@style/section"
-                android:visibility="@{accountViewModel.userLogin.data != null ? View.VISIBLE : View.GONE, default=visible}">-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                style="@style/section">
+                style="@style/section"
+                android:visibility="@{viewModel.userLogin.data != null ? View.VISIBLE : View.GONE, default=visible}">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -112,34 +117,40 @@
                 </LinearLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ProgressBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/home_list_item_card_height"
-                        android:layout_centerInParent="true"
-                        android:visibility="@{viewModel.myMaps.loading ? View.VISIBLE : View.INVISIBLE, default=visible}"/>
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/home_list_item_card_height">
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvMyMaps"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="@{viewModel.myMaps.loading ? View.GONE : View.VISIBLE, default=gone}"/>
+                    <!-- Error & loading state -->
+                    <include
+                        layout="@layout/loading_state_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="@{viewModel.myMaps.notLoaded ? View.VISIBLE : View.INVISIBLE, default=visible}"
+                        app:isLoading="@{viewModel.myMaps.loading}"
+                        app:message="@{viewModel.myMaps.message}"
+                        app:retryCallback="@{viewModel.getMyMaps}"/>
+                    <!-- Empty state -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:orientation="vertical"
                         android:gravity="center"
-                        android:visibility="@{!viewModel.myMaps.loading &amp;&amp; (viewModel.myMaps.empty || viewModel.myMaps.error) ? View.VISIBLE : View.GONE, default=visible}">
+                        android:visibility="@{viewModel.myMaps.empty ? View.VISIBLE : View.GONE, default=visible}">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{viewModel.myMaps.empty ? @string/empty_my_maps : viewModel.myMaps.message, default=@string/empty_my_maps}"
+                            android:text="@string/msg_empty_my_maps"
                             style="@style/TextAppearance.AppCompat.Medium"/>
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/add_my_map"
-                            android:visibility="@{viewModel.myMaps.empty ? View.VISIBLE : View.GONE}"/>
+                            android:text="@string/add_my_map"/>
                     </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>

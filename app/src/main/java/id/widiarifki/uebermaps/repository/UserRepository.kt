@@ -3,9 +3,6 @@ package id.widiarifki.uebermaps.repository
 import id.widiarifki.uebermaps.data.local.dao.UserDao
 import id.widiarifki.uebermaps.data.model.User
 import id.widiarifki.uebermaps.data.network.APIService
-import id.widiarifki.uebermaps.helper.PreferenceConstant
-import id.widiarifki.uebermaps.helper.PreferenceHelper
-import id.widiarifki.uebermaps.helper.Resource
 import id.widiarifki.uebermaps.helper.StatedLiveData
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -38,8 +35,6 @@ class UserRepository
         try {
             delay(3000) // pretend logout process need to call API as well
             userDao.deleteUserLogin()
-            // TODO: data login dibuat 1 source dari room
-            PreferenceHelper.instance()?.clearSession()
         } catch (e: Exception) {
             throw Exception(e)
         }
@@ -84,11 +79,6 @@ class UserRepository
                 userDao.insert(it.also {
                     it.isUserLogin = true
                 })
-
-                // TODO: data login dibuat 1 source dari room
-                it.id?.let { id ->
-                    PreferenceHelper.instance()?.saveInt(PreferenceConstant.PARAM_USER_ID, id)
-                }
             }
         } catch (e: Exception) {
             throw (e)

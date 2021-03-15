@@ -6,23 +6,23 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="id.widiarifki.uebermaps.presentation.main.home.HomeFragment"
+        android:name="id.widiarifki.uebermaps.presentation.home.HomeFragment"
         android:label="@string/label_explore"
         tools:layout="@layout/fragment_home">
     </fragment>
     <fragment
         android:id="@+id/notifFragment"
-        android:name="id.widiarifki.uebermaps.presentation.main.notif.NotifFragment"
+        android:name="id.widiarifki.uebermaps.presentation.notif.NotifFragment"
         android:label="@string/label_notif"
         tools:layout="@layout/fragment_notif"/>
     <fragment
         android:id="@+id/accountFragment"
-        android:name="id.widiarifki.uebermaps.presentation.main.account.AccountFragment"
+        android:name="id.widiarifki.uebermaps.presentation.account.AccountFragment"
         android:label="@string/label_account"
         tools:layout="@layout/fragment_account"/>
     <fragment
         android:id="@+id/authFragment"
-        android:name="id.widiarifki.uebermaps.presentation.main.auth.AuthFragment"
+        android:name="id.widiarifki.uebermaps.presentation.auth.AuthFragment"
         android:label="AuthFragment"
         tools:layout="@layout/fragment_auth"/>
 </navigation>

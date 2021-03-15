@@ -1,10 +1,7 @@
 package id.widiarifki.uebermaps.data.model
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import id.widiarifki.uebermaps.helper.PreferenceConstant
-import id.widiarifki.uebermaps.helper.PreferenceHelper
 
 @Entity
 data class User(

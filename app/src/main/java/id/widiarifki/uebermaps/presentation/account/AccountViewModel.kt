@@ -1,12 +1,9 @@
-package id.widiarifki.uebermaps.presentation.main.account
+package id.widiarifki.uebermaps.presentation.account
 
-import android.util.Log
-import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.widiarifki.uebermaps.data.model.User
-import id.widiarifki.uebermaps.helper.Resource
 import id.widiarifki.uebermaps.helper.StatedLiveData
 import id.widiarifki.uebermaps.repository.UserRepository
 import kotlinx.coroutines.launch
@@ -23,7 +20,9 @@ class AccountViewModel
     init {
         getUserLogin()
         viewModelScope.launch {
-            userRepository.refreshUserLogin()
+            try {
+                userRepository.refreshUserLogin()
+            } catch (e: Exception) {}
         }
     }
 

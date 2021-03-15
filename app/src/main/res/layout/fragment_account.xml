@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.main.account.AccountFragment">
+    tools:context=".presentation.account.AccountFragment">
     <data>
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="id.widiarifki.uebermaps.presentation.main.account.AccountViewModel" />
+            type="id.widiarifki.uebermaps.presentation.account.AccountViewModel" />
     </data>
 
     <RelativeLayout

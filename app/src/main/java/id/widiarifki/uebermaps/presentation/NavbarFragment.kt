@@ -1,42 +1,28 @@
-package id.widiarifki.uebermaps.presentation.main
+package id.widiarifki.uebermaps.presentation
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import id.widiarifki.uebermaps.R
+import id.widiarifki.uebermaps.base.BaseFragment
 import id.widiarifki.uebermaps.databinding.FragmentMainBinding
-import id.widiarifki.uebermaps.helper.PreferenceConstant
-import id.widiarifki.uebermaps.helper.PreferenceHelper
-import id.widiarifki.uebermaps.presentation.main.account.AccountViewModel
+import id.widiarifki.uebermaps.presentation.account.AccountViewModel
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class NavbarFragment : BaseFragment<FragmentMainBinding>() {
 
-    private lateinit var binding: FragmentMainBinding // TODO: Make it DRY
+    override val resourceLayout: Int
+        get() = R.layout.fragment_main
+
     private var bottomNavController: NavController? = null
     private val accountViewModel: AccountViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
-        return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupBottomNavigation()
     }
 
@@ -45,7 +31,6 @@ class MainFragment : Fragment() {
             ?: return
         bottomNavController = mainNavHostFragment.navController
         bottomNavController?.addOnDestinationChangedListener { controller, destination, arguments ->
-            // TODO: prosesnya blm cukup seamless & robust
             if (destination.id == R.id.accountFragment || destination.id == R.id.notifFragment) {
                 authChecking()
             }

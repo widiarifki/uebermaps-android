@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="id.widiarifki.uebermaps.presentation.main.MainFragment"
+        android:name="id.widiarifki.uebermaps.presentation.NavbarFragment"
         android:label="Utama"
         tools:layout="@layout/fragment_main">
         <action

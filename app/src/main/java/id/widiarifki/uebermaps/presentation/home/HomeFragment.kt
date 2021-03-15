@@ -1,37 +1,27 @@
-package id.widiarifki.uebermaps.presentation.main.home
+package id.widiarifki.uebermaps.presentation.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.widiarifki.uebermaps.R
+import id.widiarifki.uebermaps.base.BaseFragment
 import id.widiarifki.uebermaps.data.model.Maps
 import id.widiarifki.uebermaps.databinding.FragmentHomeBinding
 import id.widiarifki.uebermaps.helper.SpacedItemDecoration
 import id.widiarifki.uebermaps.presentation.RootActivity
-import id.widiarifki.uebermaps.presentation.main.home.adapters.HorizontalListAdapter
 
 @AndroidEntryPoint
-class HomeFragment: Fragment(), HorizontalListAdapter.ItemViewListener {
+class HomeFragment: BaseFragment<FragmentHomeBinding>(), HorizontalListAdapter.ItemViewListener {
 
-    private lateinit var binding: FragmentHomeBinding
+    override val resourceLayout: Int
+        get() = R.layout.fragment_home
+
     private val homeViewModel: HomeViewModel by viewModels()
     private val recommendedMapsAdapter = HorizontalListAdapter(this)
     private val latestMapsAdapter = HorizontalListAdapter(this)
     private val myMapsAdapter = HorizontalListAdapter(this)
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,7 +57,6 @@ class HomeFragment: Fragment(), HorizontalListAdapter.ItemViewListener {
     private fun subscribeUI() {
         binding.apply {
             viewModel = homeViewModel
-            accountViewModel = accountViewModel
             lifecycleOwner = viewLifecycleOwner
         }
     }

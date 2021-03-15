@@ -1,7 +1,6 @@
-package id.widiarifki.uebermaps.presentation.main.home.adapters
+package id.widiarifki.uebermaps.presentation.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -9,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import id.widiarifki.uebermaps.data.model.Maps
 import id.widiarifki.uebermaps.databinding.ListItemMapsBinding
 
-class HorizontalListAdapter(val listener: ItemViewListener) : ListAdapter<Maps, HorizontalListItemHolder>(DiffCallback()) {
+class HorizontalListAdapter(val listener: ItemViewListener) : ListAdapter<Maps, HorizontalListItemHolder>(
+    DiffCallback()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HorizontalListItemHolder {
         val binding = ListItemMapsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -32,9 +33,7 @@ class HorizontalListItemHolder(val binding: ListItemMapsBinding) : RecyclerView.
         data?.let { map ->
             binding.apply {
                 maps = map
-                viewListener = listener/* = View.OnClickListener {
-                    listener.onClick(map)
-                }*/
+                viewListener = listener
             }
         }
     }

@@ -1,11 +1,8 @@
 package id.widiarifki.uebermaps.presentation.map.detail.spots
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -14,30 +11,24 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.widiarifki.uebermaps.R
+import id.widiarifki.uebermaps.base.BaseFragment
 import id.widiarifki.uebermaps.databinding.FragmentMapSpotsBinding
 import id.widiarifki.uebermaps.helper.PagingLoadStateAdapter
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MapSpotsFragment : Fragment() {
+class MapSpotsFragment : BaseFragment<FragmentMapSpotsBinding>() {
 
-    private lateinit var binding: FragmentMapSpotsBinding
+    override val resourceLayout: Int
+        get() = R.layout.fragment_map_spots
+
     private val mapSpotsViewModel: MapSpotsViewModel by viewModels()
     private val mapSpotsPagingAdapter = MapSpotsPagingAdapter()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map_spots, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupView()
+        setupRecyclerView()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -45,16 +36,14 @@ class MapSpotsFragment : Fragment() {
         observeData()
     }
 
-    private fun setupView() {
-        binding.apply {
-            rvSpots.apply {
-                layoutManager = LinearLayoutManager(context)
-                adapter = mapSpotsPagingAdapter.withLoadStateHeaderAndFooter(
-                    header = PagingLoadStateAdapter { mapSpotsPagingAdapter.retry() },
-                    footer = PagingLoadStateAdapter { mapSpotsPagingAdapter.retry() }
-                )
-                addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
-            }
+    private fun setupRecyclerView() {
+        binding.rvSpots.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = mapSpotsPagingAdapter.withLoadStateHeaderAndFooter(
+                header = PagingLoadStateAdapter { mapSpotsPagingAdapter.retry() },
+                footer = PagingLoadStateAdapter { mapSpotsPagingAdapter.retry() }
+            )
+            addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
         }
     }
 

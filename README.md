@@ -34,11 +34,7 @@ app
 ```
 
 ### Screenshot
-![Home](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/1.jpg =300x)
-![Detail Map 1](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/2.jpg =300x)
-![Detail Map 2](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/3.jpg =300x)
-![Account](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/4.jpg =300x)
-![Login](https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/5.jpg =300x)
+<img src="https://raw.githubusercontent.com/widiarifki/uebermaps-android/master/_extras/1.jpg" width="300">
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
